@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
 import { store } from './store';
-import { Provider } from 'react-redux';
+import './assets/styles/style.scss';
 
-export const reduxStore = store;
+const reduxStore = store;
 
 ReactDOM.render(
   <Provider store={reduxStore}>
