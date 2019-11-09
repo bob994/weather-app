@@ -12,5 +12,6 @@ export interface WeatherResponse {
   weather: {
     description: string;
     main: WeatherType;
+    icon: string;
   }[];
 }

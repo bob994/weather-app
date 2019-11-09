@@ -1,16 +1,20 @@
 import React, { useState, useEffect, ChangeEventHandler } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ReactComponent as SearchIcon } from '../../assets/icons/Search.svg';
 import {
   getCurrentWeatherSelector,
   getCurrentWeather,
+  getWeatherIsFetching,
 } from '../../modules/weather/weather';
-import { capitalizeString } from '../../utils/capitalizeString';
+
+import { InputGroup } from './InputGroup';
+import { TemperatureInfo } from './TemperatureInfo';
 
 export const Header = () => {
   const dispatch = useDispatch();
   const weather = useSelector(getCurrentWeatherSelector);
+  const isFetching = useSelector(getWeatherIsFetching);
+
   const [city, setCity] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
@@ -30,29 +34,15 @@ export const Header = () => {
 
   return (
     <header>
-      <div className="header-input-group">
-        <input
-          type="text"
-          value={city}
-          onChange={handleCityChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {!isFocused && <SearchIcon />}
-      </div>
-      {weather && (
-        <>
-          <div className="header-temperature">
-            {Math.round(weather.main.temp)}&deg;
-          </div>
-          <div className="header-type">
-            {capitalizeString(weather.weather[0].description)}
-          </div>
-          <button className="header-button" type="button">
-            More details
-          </button>
-        </>
-      )}
+      <InputGroup
+        city={city}
+        isFetching={isFetching}
+        isFocused={isFocused}
+        handleCityChange={handleCityChange}
+        handleFocus={handleFocus}
+        handleBlur={handleBlur}
+      />
+      {weather && <TemperatureInfo weather={weather} />}
     </header>
   );
 };

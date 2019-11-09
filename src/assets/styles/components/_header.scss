@@ -20,11 +20,19 @@
     color: $white;
     font-size: 96px;
     font-weight: bold;
+    position: relative;
+    display: inline-block;
 
     &:after {
       content: 'C';
       font-size: 48px;
       vertical-align: super;
+    }
+
+    &-icon {
+      position: absolute;
+      bottom: 10px;
+      right: 25px;
     }
   }
 

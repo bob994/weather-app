@@ -51,3 +51,6 @@ export const weatherReducer = createReducer<WeatherState, WeatherActions>(
 
 export const getCurrentWeatherSelector = (state: ReduxState) =>
   state.weather.currentWeather;
+
+export const getWeatherIsFetching = (state: ReduxState) =>
+  state.weather.fetching;
