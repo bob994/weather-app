@@ -15,9 +15,9 @@ export const Landing = () => {
   const weather = useSelector(getCurrentWeatherSelector);
 
   useEffect(() => {
-    if (!coordinates) dispatch(getLocation.request(''));
+    if (!coordinates) dispatch(getLocation.request());
 
-    if (coordinates && !weather) dispatch(getCurrentWeather.request(''));
+    if (coordinates && !weather) dispatch(getCurrentWeather.request(null));
   }, [coordinates, weather, dispatch]);
 
   const sunnyStyle = getWeatherStyle(weather ? weather.weather[0].main : 'Sun');

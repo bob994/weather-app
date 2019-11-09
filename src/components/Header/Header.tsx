@@ -15,11 +15,12 @@ export const Header = () => {
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    if (weather) setCity(weather.name);
-  }, [weather]);
+    if (weather && city === '') setCity(weather.name);
+  }, [weather, city]);
 
   const handleCityChange: ChangeEventHandler<HTMLInputElement> = e => {
     setCity(e.target.value);
+
     dispatch(getCurrentWeather.request(e.target.value));
   };
 

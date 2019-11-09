@@ -6,7 +6,7 @@ export const getCurrentWeather = createAsyncAction(
   'GET_CURRENT_WEATHER_REQUEST',
   'GET_CURRENT_WEATHER_SUCCESS',
   'GET_CURRENT_WEATHER_FAILURE'
-)<string | undefined, WeatherResponse, undefined>();
+)<string | null, WeatherResponse, undefined>();
 
 export type GetCurrentWeatherRequestAction = ActionType<
   typeof getCurrentWeather.request

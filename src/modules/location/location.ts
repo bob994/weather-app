@@ -5,7 +5,7 @@ export const getLocation = createAsyncAction(
   'GET_LOCATION_REQUEST',
   'GET_LOCATION_SUCCESS',
   'GET_LOCATION_FAILURE'
-)<string, Coordinates, undefined>();
+)<undefined, Coordinates, undefined>();
 
 export type GetLocationRequestAction = ActionType<typeof getLocation.request>;
 export type GetLocationSuccessAction = ActionType<typeof getLocation.success>;
