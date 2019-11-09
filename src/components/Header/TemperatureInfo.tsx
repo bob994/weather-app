@@ -22,9 +22,6 @@ export const TemperatureInfo: FunctionComponent<Props> = ({ weather }) => {
         />
       </div>
       <div className="header-type">{desc}</div>
-      <button className="header-button" type="button">
-        More details
-      </button>
     </div>
   );
 };

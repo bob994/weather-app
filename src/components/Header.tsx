@@ -1,16 +1,26 @@
-import React, { useState, useEffect, ChangeEventHandler } from 'react';
+import React, {
+  useState,
+  useEffect,
+  ChangeEventHandler,
+  FunctionComponent,
+  MouseEvent,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
   getCurrentWeatherSelector,
   getCurrentWeather,
   getWeatherIsFetching,
-} from '../../modules/weather/weather';
+} from '../modules/weather/weather';
 
-import { InputGroup } from './InputGroup';
-import { TemperatureInfo } from './TemperatureInfo';
+import { InputGroup } from './header/InputGroup';
+import { TemperatureInfo } from './header/TemperatureInfo';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export const Header = () => {
+const Header: FunctionComponent<RouteComponentProps> = ({
+  history,
+  location,
+}) => {
   const dispatch = useDispatch();
   const weather = useSelector(getCurrentWeatherSelector);
   const isFetching = useSelector(getWeatherIsFetching);
@@ -32,6 +42,12 @@ export const Header = () => {
 
   const handleBlur = () => setIsFocused(false);
 
+  const handleButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    history.push('/details');
+  };
+
   return (
     <header>
       <InputGroup
@@ -43,6 +59,19 @@ export const Header = () => {
         handleBlur={handleBlur}
       />
       {weather && <TemperatureInfo weather={weather} />}
+      {weather && location.pathname === '/' && (
+        <button
+          className="header-button"
+          type="button"
+          onClick={handleButtonClick}
+        >
+          More details
+        </button>
+      )}
     </header>
   );
 };
+
+const enchantedHeader = withRouter(Header);
+
+export { enchantedHeader as Header };
