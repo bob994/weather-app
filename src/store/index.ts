@@ -2,9 +2,18 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createLogicMiddleware } from 'redux-logic';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-const logicMiddleware = createLogicMiddleware(); // TODO Add logics later
+import { locationReducer, LocationState } from './location/location';
+import locationLogic from './location/locationLogic';
 
-const rootReducer = combineReducers({}); // TODO Add reducers later
+export interface ReduxState {
+  location: LocationState;
+}
+
+const logicMiddleware = createLogicMiddleware([...locationLogic]);
+
+const rootReducer = combineReducers({
+  location: locationReducer,
+});
 
 const composeEnhancers = composeWithDevTools({});
 
