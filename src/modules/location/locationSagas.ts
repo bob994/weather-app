@@ -2,21 +2,13 @@ import { all, call, put, takeLatest } from '@redux-saga/core/effects';
 import { getType } from 'typesafe-actions';
 
 import { getLocation } from './location';
+import { getUserLocation } from '../../services/location';
 
 function* getLocationSaga() {
-  const getUserLocation = () =>
-    new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(
-        location => resolve(location),
-        error => reject(error)
-      );
-    });
-
-  const location = yield call(getUserLocation);
-
-  if (location) {
+  try {
+    const location = yield call(getUserLocation);
     yield put(getLocation.success(location.coords));
-  } else {
+  } catch (error) {
     yield put(getLocation.failure());
   }
 }
