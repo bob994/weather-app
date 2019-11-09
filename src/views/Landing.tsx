@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Header } from './landing/Header';
+import { Header } from '../components/Header/Header';
 import { getWeatherStyle } from '../utils/getWeatherStyle';
 import { getLocation, getCoordinates } from '../store/location/location';
 

@@ -1,0 +1,48 @@
+.header {
+  &-input-group {
+    display: flex;
+    align-items: center;
+
+    input {
+      border: none;
+      background-color: transparent;
+      color: $white;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 18px;
+      width: 80px;
+      padding: 0;
+    }
+  }
+
+  &-temperature {
+    color: $white;
+    font-size: 96px;
+    font-weight: bold;
+
+    &:after {
+      content: 'C';
+      font-size: 48px;
+      vertical-align: super;
+    }
+  }
+
+  &-type {
+    color: $white;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: $spacing-xs;
+  }
+
+  &-button {
+    background-color: transparent;
+    border: 0;
+    padding: 0 $spacing-s 0 0;
+    margin: 0;
+    color: $white;
+    font-size: 12px;
+    background-image: url('../../icons/Arrow.svg');
+    background-repeat: no-repeat;
+    background-position: right center;
+  }
+}
