@@ -4,16 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Header } from '../components/Header/Header';
 import { getWeatherStyle } from '../utils/getWeatherStyle';
 import { getLocation, getCoordinates } from '../store/location/location';
+import {
+  getCurrentWeather,
+  getCurrentWeatherSelector,
+} from '../store/weather/weather';
 
 export const Landing = () => {
   const dispatch = useDispatch();
   const coordinates = useSelector(getCoordinates);
+  const weather = useSelector(getCurrentWeatherSelector);
 
   useEffect(() => {
     if (!coordinates) dispatch(getLocation.request(''));
-  }, [coordinates, dispatch]);
 
-  const sunnyStyle = getWeatherStyle('sunny');
+    if (coordinates && !weather) dispatch(getCurrentWeather.request());
+  }, [coordinates, weather, dispatch]);
+
+  const sunnyStyle = getWeatherStyle(weather ? weather.weather[0].main : 'Sun');
 
   return (
     <div className="landing" style={sunnyStyle}>
