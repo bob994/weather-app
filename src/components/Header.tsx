@@ -11,6 +11,7 @@ import {
   getCurrentWeatherSelector,
   getCurrentWeather,
   getWeatherIsFetching,
+  getWeatherError,
 } from '../modules/weather/weather';
 
 import { InputGroup } from './header/InputGroup';
@@ -24,13 +25,14 @@ const Header: FunctionComponent<RouteComponentProps> = ({
   const dispatch = useDispatch();
   const weather = useSelector(getCurrentWeatherSelector);
   const isFetching = useSelector(getWeatherIsFetching);
+  const weatherError = useSelector(getWeatherError);
 
   const [city, setCity] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (weather && city === '') setCity(weather.name);
-  }, [weather, city]);
+  }, [weather]);
 
   const handleCityChange: ChangeEventHandler<HTMLInputElement> = e => {
     setCity(e.target.value);
@@ -61,6 +63,11 @@ const Header: FunctionComponent<RouteComponentProps> = ({
         handleFocus={handleFocus}
         handleBlur={handleBlur}
       />
+      {weatherError && (
+        <h1 className="header-error">
+          Please provide correct city and try again!
+        </h1>
+      )}
       {weather && <TemperatureInfo weather={weather} />}
       {weather && location.pathname === '/' && (
         <button

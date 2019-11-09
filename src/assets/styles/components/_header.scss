@@ -12,7 +12,30 @@
       font-size: 18px;
       width: 80px;
       padding: 0;
+      padding-left: $spacing-xs;
       margin-right: $spacing-s;
+
+      &::placeholder {
+        color: $gray;
+        opacity: 1;
+        font-weight: normal;
+        font-size: 14px;
+        text-transform: none;
+      }
+
+      &:-ms-input-placeholder {
+        color: $gray;
+        font-weight: normal;
+        font-size: 14px;
+        text-transform: none;
+      }
+
+      &::-ms-input-placeholder {
+        color: $gray;
+        font-weight: normal;
+        font-size: 14px;
+        text-transform: none;
+      }
     }
   }
 
@@ -65,5 +88,13 @@
     background-image: url('../../icons/Arrow.svg');
     background-repeat: no-repeat;
     background-position: right center;
+  }
+
+  &-error {
+    color: $red;
+    margin-top: $spacing-l;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
   }
 }

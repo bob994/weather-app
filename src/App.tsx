@@ -12,6 +12,7 @@ import { getCoordinates, getLocation } from './modules/location/location';
 import {
   getCurrentWeatherSelector,
   getCurrentWeather,
+  getWeatherError,
 } from './modules/weather/weather';
 import { Header } from './components/Header';
 import { getWeatherStyle } from './utils/getWeatherStyle';
@@ -22,12 +23,14 @@ const App: FunctionComponent<RouteComponentProps> = ({
   const dispatch = useDispatch();
   const coordinates = useSelector(getCoordinates);
   const weather = useSelector(getCurrentWeatherSelector);
+  const weatherError = useSelector(getWeatherError);
 
   useEffect(() => {
     if (!coordinates) dispatch(getLocation.request());
 
-    if (coordinates && !weather) dispatch(getCurrentWeather.request(null));
-  }, [coordinates, weather, dispatch]);
+    if (coordinates && !weather && !weatherError)
+      dispatch(getCurrentWeather.request(null));
+  }, [coordinates, weather, dispatch, weatherError]);
 
   const wrapperClassName = pathname === '/' ? 'landing' : 'details';
 

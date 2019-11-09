@@ -26,10 +26,12 @@ type WeatherActions =
 export interface WeatherState {
   currentWeather?: WeatherResponse;
   fetching: boolean;
+  error: boolean;
 }
 
 const INITIAL_STATE: WeatherState = {
   fetching: false,
+  error: false,
 };
 
 export const weatherReducer = createReducer<WeatherState, WeatherActions>(
@@ -38,15 +40,16 @@ export const weatherReducer = createReducer<WeatherState, WeatherActions>(
   .handleAction(getCurrentWeather.request, state => ({
     ...state,
     fetching: true,
+    error: false,
   }))
   .handleAction(getCurrentWeather.success, (state, { payload }) => ({
     ...state,
     currentWeather: payload,
     fetching: false,
   }))
-  .handleAction(getCurrentWeather.failure, state => ({
-    ...state,
-    fetching: false,
+  .handleAction(getCurrentWeather.failure, () => ({
+    ...INITIAL_STATE,
+    error: true,
   }));
 
 export const getCurrentWeatherSelector = (state: ReduxState) =>
@@ -54,3 +57,5 @@ export const getCurrentWeatherSelector = (state: ReduxState) =>
 
 export const getWeatherIsFetching = (state: ReduxState) =>
   state.weather.fetching;
+
+export const getWeatherError = (state: ReduxState) => state.weather.error;

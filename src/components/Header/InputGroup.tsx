@@ -28,6 +28,7 @@ export const InputGroup: FunctionComponent<Props> = ({
         onChange={handleCityChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        placeholder="Insert city"
       />
       {isFetching ? <Spinner /> : !isFocused ? <SearchIcon /> : null}
     </div>
