@@ -36,6 +36,18 @@
     }
   }
 
+  &.is-small &-temperature {
+    font-size: 72px;
+
+    &:after {
+      font-size: 36px;
+    }
+
+    &-icon {
+      display: none;
+    }
+  }
+
   &-type {
     color: $white;
     font-size: 25px;

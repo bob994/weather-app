@@ -16,7 +16,9 @@ import {
 import { Header } from './components/Header';
 import { getWeatherStyle } from './utils/getWeatherStyle';
 
-const App: FunctionComponent<RouteComponentProps> = ({ location }) => {
+const App: FunctionComponent<RouteComponentProps> = ({
+  location: { pathname },
+}) => {
   const dispatch = useDispatch();
   const coordinates = useSelector(getCoordinates);
   const weather = useSelector(getCurrentWeatherSelector);
@@ -26,8 +28,6 @@ const App: FunctionComponent<RouteComponentProps> = ({ location }) => {
 
     if (coordinates && !weather) dispatch(getCurrentWeather.request(null));
   }, [coordinates, weather, dispatch]);
-
-  const { pathname } = location;
 
   const wrapperClassName = pathname === '/' ? 'landing' : 'details';
 

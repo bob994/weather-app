@@ -48,8 +48,11 @@ const Header: FunctionComponent<RouteComponentProps> = ({
     history.push('/details');
   };
 
+  const headerClassName =
+    location.pathname === '/details' ? 'header is-small' : 'header';
+
   return (
-    <header>
+    <header className={headerClassName}>
       <InputGroup
         city={city}
         isFetching={isFetching}

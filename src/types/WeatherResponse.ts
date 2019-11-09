@@ -9,6 +9,13 @@ export interface WeatherResponse {
     temp_max: number;
     temp_maxmin: number;
   };
+  wind: {
+    speed: number;
+    deg: number;
+  };
+  clouds: {
+    all: number;
+  };
   weather: {
     description: string;
     main: WeatherType;
